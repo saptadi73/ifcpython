@@ -9,7 +9,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from psycopg2 import pool
 import ifcopenshell.util.element
-from routers import projects,tasks,task_activities, task_approver
+from routers import projects,tasks,task_activities, task_approver, issues, issue_activities,issue_approver
 from fastapi.staticfiles import StaticFiles
 import os
 
@@ -50,9 +50,15 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 app.include_router(projects.router, prefix="/project", tags=["project"])
+
 app.include_router(tasks.router, prefix="/task", tags=["task"])
 app.include_router(task_activities.router, prefix="/task/activity", tags=["task_activity"])
 app.include_router(task_approver.router, prefix="/task/approver", tags=["task_approver"])
+
+app.include_router(issues.router, prefix="/issue", tags=["issue"])
+app.include_router(issue_activities.router, prefix="/issue/activity", tags=["issue_activity"])
+app.include_router(issue_approver.router, prefix="/issue/approver", tags=["issue_approver"])
+
 
 ifc_file = ifcopenshell.open("sample.ifc")
 
