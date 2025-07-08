@@ -31,7 +31,7 @@ def create_new_task_activity(tasks: taskActivitiesCreate, filename: str):
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
         sql_command = """
-            INSERT INTO task_activities (activity, date_activity, photo, task_id, user_task_activity_id, created_at)
+            INSERT INTO task_activities (activity, date_activity, photo, task_id, user_task_activities_id, created_at)
             VALUES (%s, %s, %s, %s, %s, now())
             RETURNING id;
         """
