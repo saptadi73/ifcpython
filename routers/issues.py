@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, UploadFile, File
 from services.issue_service import getAllIssueDone, create_new_issue, delete_issue, edit_issue, edit_issue_nofile,getAllIssue
 from models.issue import issueCreate,issueEdit
+from services.bcf_file_maker import createBCFZipFile,createMarkupFile,createViewpoinFile
+from models.bcf_model import Markup, ViewPoint, BCFZipCreate
 
 import os
 import shutil
@@ -62,3 +64,16 @@ def update_issue(task: issueEdit = Depends(issueEdit.as_form), file: UploadFile 
 @router.post("/delete")
 def hapus_issue(task: issueEdit):
     return delete_issue(task)
+
+@router.post("/bcf/markup")
+def createMarkupBCF(markup: Markup) :
+    return createMarkupFile(markup)
+
+@router.post("/bcf/viewpoint")
+def createViewPoint(viewpoint: ViewPoint) :
+    return createViewpoinFile(viewpoint)
+
+@router.post("/bcf/bcfzip")
+def createBCFZip(bcfzip: BCFZipCreate) :
+    return createBCFZipFile(bcfzip)
+
