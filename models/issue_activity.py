@@ -29,7 +29,7 @@ class issueActivitiesEdit(BaseModel) :
     date_activity: Optional[date]
     photo: Optional[str]
     issue_id: Optional[str]
-    user_issue_activity_id: Optional[str]
+    user_issue_activities_id: Optional[str]
     id: str
     @classmethod
     def as_form(
